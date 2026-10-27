@@ -83,20 +83,20 @@ ___
  2. **Obriga a uma decisão estrutural?**
  3. **É crítica para o sucesso?**
 
-| **Código** | **Design/Arquitetura** | **Justificação**                                                                                                |
-| ---------- | ---------------------- | --------------------------------------------------------------------------------------------------------------- |
-| U1 e U2    | Design                 | A segurança e autenticação dos pagamentos são necessárias, mas sem impacto na estrututa arquitetural do sistema |
-| C1a        | Não arquitetura        | É apenas um dado usado para avaliar outras características.                                                     |
-| C1b        | Não arquitetural       | A quantidade de mensagens a serem enviadas por segundo não exigem uma estrutura própria completa.               |
-| C2a e C2b  | Arquitetural           | Obriga a garantir separação entre o caminho do desbloqueio da bicicleta das partes de leitura.                  |
-| C3a        | Arquitetural           | Obriga a decidir o que a doca faz sozinha e o que depende do servidor.                                          |
-| C3b        | Arquitetural           | Obriga a uma receção de eventos e a uma ordem de processamento definida.                                        |
-| C4         | Arquitetural           | O desbloqueio não pode depender, no momento, de partes que podem falhar.                                        |
-| C5a        | Arquitetural           | Faturas com comunicação e separada da cobrança.                                                                 |
-| C5b        | Arquitetural           | O percurso tem de ficar separado dos restantes dados da viagem com acesso próprios.                             |
-| C6         | Arquitetural           |                                                                                                                 |
-| C7         | Arquitetural           | As regras dos tarifários têm de estar isoladas, com um ponto onde se acrescentam tarifários novos.              |
-| C8         | Arquitetural           | Favorece soluções simples, com poucas partes a implantar e manter.                                              |
+| **Código** | **Design/Arquitetura** | **Justificação**                                                                                                                                                                                                                                                                                        |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| U1 e U2    | Design                 | A segurança e autenticação dos pagamentos são necessárias, mas sem impacto na estrututa arquitetural do sistema                                                                                                                                                                                         |
+| C1a        | Não arquitetura        | É apenas um dado usado para avaliar outras características.                                                                                                                                                                                                                                             |
+| C1b        | Arquitetural           | A quantidade de mensagens a serem enviadas por segundo não exigem uma estrutura própria completa. Cerca de 1050 bicicletas a enviar 1 mensagem a cada 30 segundos dá no máximo 35 mensagens por segundo, que é uma carga baixa. De qualquer, maneira vamos considerar como característica arquitetural. |
+| C2a e C2b  | Arquitetural           | Obriga a garantir separação entre o caminho do desbloqueio da bicicleta das partes de leitura.                                                                                                                                                                                                          |
+| C3a        | Arquitetural           | Obriga a decidir o que a doca faz sozinha e o que depende do servidor.                                                                                                                                                                                                                                  |
+| C3b        | Arquitetural           | Obriga a uma receção de eventos e a uma ordem de processamento definida.                                                                                                                                                                                                                                |
+| C4         | Arquitetural           | O desbloqueio não pode depender, no momento, de partes que podem falhar.                                                                                                                                                                                                                                |
+| C5a        | Arquitetural           | Faturas com comunicação e separada da cobrança.                                                                                                                                                                                                                                                         |
+| C5b        | Arquitetural           | O percurso tem de ficar separado dos restantes dados da viagem com acesso próprios.                                                                                                                                                                                                                     |
+| C6         | Arquitetural           |                                                                                                                                                                                                                                                                                                         |
+| C7         | Arquitetural           | As regras dos tarifários têm de estar isoladas, com um ponto onde se acrescentam tarifários novos.                                                                                                                                                                                                      |
+| C8         | Arquitetural           | Favorece soluções simples, com poucas partes a implantar e manter.                                                                                                                                                                                                                                      |
 
 ___
 
@@ -165,9 +165,9 @@ Outras consideradas e motivos:
 
 Como pedido no enunciado, os **trade-offs** entre as top 3:
 
-- **Disponibilidade** vs **Recuperabilidade** - permitir desbloqueios com a doca sem rede aumenta a disponibilidade, mas cria eventos que é preciso reconciliar mais tarde. Mais de uma exige mais da outra.
-- **Disponibilidade** vs **Cobrança Imediata** - o desbloqueio não pode esperar pela cobrança, por isso a cobrança acontece depois.
-- **Extensibilidade** vs **Simplicidade** - pontos de extensão custam código e testes a uma equipa de 6. A extensibilidade fica limitada ao tarifário, sem generalizar tudo.
+- **Disponibilidade** vs **Recuperabilidade** - Permitir desbloqueios com a doca sem rede aumenta a disponibilidade, mas cria eventos que é preciso reconciliar mais tarde. Mais de uma exige mais da outra.
+- **Disponibilidade** vs **Cobrança Imediata** - O desbloqueio não pode esperar pela cobrança, por isso a cobrança acontece depois.
+- **Extensibilidade** vs **Simplicidade** - Pontos de extensão custam código e testes a uma equipa de 6. A extensibilidade fica limitada ao tarifário, sem generalizar tudo.
 
 ___
 
