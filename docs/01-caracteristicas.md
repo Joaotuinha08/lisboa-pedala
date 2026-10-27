@@ -86,7 +86,7 @@ ___
 | **Código** | **Design/Arquitetura** | **Justificação**                                                                                                                                                                                                                                                                                        |
 | ---------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | U1 e U2    | Design                 | A segurança e autenticação dos pagamentos são necessárias, mas sem impacto na estrututa arquitetural do sistema                                                                                                                                                                                         |
-| C1a        | Não arquitetura        | É apenas um dado usado para avaliar outras características.                                                                                                                                                                                                                                             |
+| C1a        | Não arquitetural       | É apenas um dado usado para avaliar outras características.                                                                                                                                                                                                                                             |
 | C1b        | Arquitetural           | A quantidade de mensagens a serem enviadas por segundo não exigem uma estrutura própria completa. Cerca de 1050 bicicletas a enviar 1 mensagem a cada 30 segundos dá no máximo 35 mensagens por segundo, que é uma carga baixa. De qualquer, maneira vamos considerar como característica arquitetural. |
 | C2a e C2b  | Arquitetural           | Obriga a garantir separação entre o caminho do desbloqueio da bicicleta das partes de leitura.                                                                                                                                                                                                          |
 | C3a        | Arquitetural           | Obriga a decidir o que a doca faz sozinha e o que depende do servidor.                                                                                                                                                                                                                                  |
@@ -104,13 +104,13 @@ ___
 
 Depois juntaram-se as características repetidas e reduziu-se a lista a **7 candidatas** (não ordenadas). Para cada uma escreveu-se uma definição para este sistema, para evitar ambiguidades.
 
-1. **Disponibilidade** - Em qualquer hora, pelo menos 90% das 180 estações conseguem desbloquear bicicletas.
-2. **Robustez** - Uma doca sem rede continua a permitir desbloqueios e devoluções, guardando os eventos localmente.
-3. **Recuperabilidade** - Quando a rede volta, os eventos guardados são processados de forma a que cada viagem fique registada e cobrada exatamente uma vez.
-4. **Elasticidade** - O sistema absorve os picos diários e os picos de eventos sem degradar o desbloqueio, e sem pagar a capacidade do pico o dia inteiro.
-5. **Extensibilidade** - É possível acrescentar um tarifário novo de outra câmara sem alterar os componentes existentes.
-6. **Arquivabilidade** - As faturas são comunicadas e conservadas, inalteradas, durante 10 anos.
-7. **Privacidade** - O percurso só é acessível a quem precisa.
+1. **Disponibilidade** - Em qualquer hora, pelo menos 90% das 180 estações conseguem desbloquear bicicletas. (C3a e C4)
+2. **Robustez** - Uma doca sem rede continua a permitir desbloqueios e devoluções, guardando os eventos localmente. (C3)
+3. **Recuperabilidade** - Quando a rede volta, os eventos guardados são processados de forma a que cada viagem fique registada e cobrada exatamente uma vez. (C3b)
+4. **Elasticidade** - O sistema absorve os picos diários e os picos de eventos sem degradar o desbloqueio, e sem pagar a capacidade do pico o dia inteiro. (C2a e C2b)
+5. **Extensibilidade** - É possível acrescentar um tarifário novo de outra câmara sem alterar os componentes existentes. (C7)
+6. **Arquivabilidade** - As faturas são comunicadas e conservadas, inalteradas, durante 10 anos. (C5a)
+7. **Privacidade** - O percurso só é acessível a quem precisa. (C5b)
 
 ___
 
@@ -123,7 +123,7 @@ A frase C4 pede apenas **disponibilidade**: "o desbloqueio tem de funcionar semp
 - **Disponibilidade** - Em cada hora, pelo menos 90% estações conseguem desbloquear. (C4)
 - **Robustez** - Uma doca sem rede continua a operar. (C3a) 
 - **Recuperabilidade** - Quando a rede volta, a sincronização não perde nem duplica viagens. (C3b)
-- **Elasticidade** - Os picos não impedem desbloqueios.
+- **Elasticidade** - Os picos não impedem desbloqueios. (C2a e C2b)
 - **Suportabilidade** - Saber, hora a hora, quantas estações conseguem desbloquear. Sem isso não se consegue provar nem contestar a multa. (C4)
 
 ___
@@ -161,7 +161,7 @@ Outras consideradas e motivos:
 3. **Arquivabilidade** e **Privacidade** - São obrigatórias, mas resolvem-se com decisões sobre os dados (separação e agregação) sem conduzir a estrutura geral.
 4. **Desempenho**, **Escalabilidade** e **Interoperabilidade** - Cortadas pelos motivos dos pontos 2 e 3.
 5. **Simplicidade** e **Viabilidade** - Tratada como restrição presente em todos os trade-offs.
-6. **Segurança**, **Autenticação** e **Suportabilidade** - Implícitas e necessárias, mas com menos impacto estrutural do que as top 3. A suportabilidade entra na decomposição do ponto 6.
+6. **Segurança**, **Autenticação** e **Suportabilidade** - Implícitas e necessárias, mas com menos impacto estrutural do que as top 3. A suportabilidade entra na decomposição do ponto 5.
 
 Como pedido no enunciado, os **trade-offs** entre as top 3:
 
