@@ -20,7 +20,7 @@ Para facilitar a organização e identificação das características foi atribu
 | R4         | Mapa em tempo real com bicicletas e docas livres por estação                                                                                     |
 | R5         | Abrir uma ordem de manutenção quando uma bicicleta reporta avaria (bateria, travões) ou um utilizador a reporta                                  |
 | R6         | Sugerir rotas às carrinhas para equilibrar a ocupação das estações                                                                               |
-| R7         | Relatório mensal para a Câmara: utilização por freguesia e CO₂ evitado                                                                           |
+| R7         | Relatório mensal para a Câmara: utilização por freguesia e CO2 evitado                                                                           |
 | R8         | O utilizador consulta o histórico de viagens e as faturas                                                                                        |
 
 ### Contexto adicional:
