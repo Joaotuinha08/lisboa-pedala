@@ -1,4 +1,4 @@
-# Prompts usadas para gerar o diagrama de componentes
+# Prompts usadas para gerar o diagrama de componentes em Mermaid
 
 - **Prompt 1: diagrama de dependências**
     
