@@ -1,6 +1,6 @@
 # Dependências entre componentes lógicos
 
-Diagrama dos componentes ([02-componentes.md](docs/02-componentes.md), secção 8).
+Diagrama dos componentes ([02-componentes.md](02-componentes.md), secção 8).
 
 ```mermaid
 flowchart LR
