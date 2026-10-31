@@ -4,7 +4,7 @@
 
 **Objetivo:** gerar o diagrama Mermaid com as dependências entre componentes.
 
-**Prompt:** Tendo em conta a seguinte tabela de componentes, cria o diagrama em formato Mermaid que corresponda às dependências dos mesmos:
+**Prompt:** "Tendo em conta a seguinte tabela de componentes, cria o diagrama em formato Mermaid que corresponda às dependências dos mesmos:"
 
 **Tabela fornecida (De, Para, Porquê):**
 
@@ -31,7 +31,7 @@
 
 **Objetivo:** acrescentar ao diagrama subgraphs com o domínio de cada componente.
 
-**Prompt:** Acrescenta grupos com os domínios a que cada componente pertence. A seguinte tabela contém essa informação:
+**Prompt:** "Acrescenta grupos com os domínios a que cada componente pertence. A seguinte tabela contém essa informação:"
 
 **Tabela fornecida (Componente, Pacote, Domínio, Responsabilidade, Coesão):**
 

@@ -62,46 +62,44 @@ src/
       arquitetura/
 ```
 
-Cada componente expõe para fora só uma interface pública (`ServicoTarifacao`). As restantes classes do pacote ficam package-private, para que os outros componentes não dependam da estrutura interna.
 
 ### Regras allowed-to-use
 
 A coluna "Pode usar" é uma lista fechada. Tudo o que não está lá é proibido.
 
-| **Componente**                   | **Pode usar**                                                 | **ADR**  |
-| -------------------------------- | ------------------------------------------------------------- | -------- |
-| Desbloqueio                      | identificacao                                                 | ADR-004  |
-| Receção de Eventos das Docas     | registo_viagens, mapa_ocupacao, monitorizacao_disponibilidade | ADR-005  |
-| Registo de Viagens               | identificacao, tarifacao, cobranca                            | ADR-005  |
-| Percursos                        | registo_viagens                                               | ADR-007  |
-| Tarifação                        | nenhum                                                        | ADR-006  |
-| Cobrança                         | faturacao                                                     | ADR-004  |
-| Faturação                        | nenhum                                                        |          |
-| Identificação de Utilizadores    | nenhum                                                        |          |
-| Consulta de Histórico            | registo_viagens, faturacao                                    |          |
-| Mapa de Ocupação                 | nenhum                                                        |          |
-| Monitorização de Disponibilidade | nenhum                                                        |          |
-| Redistribuição                   | mapa_ocupacao                                                 |          |
-| Telemetria                       | percursos, ordens_manutencao                                  | ADR-007  |
-| Ordens de Manutenção             | nenhum                                                        |          |
-| Relatórios Municipais            | registo_viagens, percursos                                    | ADR-007  |
+| **Componente**                   | **Pode usar**                                                 | **ADR** |
+| -------------------------------- | ------------------------------------------------------------- | ------- |
+| Desbloqueio                      | identificacao                                                 | ADR-004 |
+| Receção de Eventos das Docas     | registo_viagens, mapa_ocupacao, monitorizacao_disponibilidade | ADR-005 |
+| Registo de Viagens               | identificacao, tarifacao, cobranca                            | ADR-005 |
+| Percursos                        | registo_viagens                                               | ADR-007 |
+| Tarifação                        | nenhum                                                        | ADR-006 |
+| Cobrança                         | faturacao                                                     | ADR-004 |
+| Faturação                        | nenhum                                                        |         |
+| Identificação de Utilizadores    | nenhum                                                        |         |
+| Consulta de Histórico            | registo_viagens, faturacao                                    |         |
+| Mapa de Ocupação                 | nenhum                                                        |         |
+| Monitorização de Disponibilidade | nenhum                                                        |         |
+| Redistribuição                   | mapa_ocupacao                                                 |         |
+| Telemetria                       | percursos, ordens_manutencao                                  | ADR-007 |
+| Ordens de Manutenção             | nenhum                                                        |         |
+| Relatórios Municipais            | registo_viagens, percursos                                    | ADR-007 |
 
 O diagrama destas dependências está em [dependencias-componentes.md](diagramas/dependencias-componentes.md).
 
 ### Regras verificáveis
 
 - **RM1** - Um componente só importa os componentes da sua linha na tabela.
-- **RM2** - Não há ciclos entre componentes. O grafo permitido não tem ciclos, por isso cumprir a RM1 garante a RM2.
+- **RM2** - Não há ciclos entre componentes.
 - **RM3** - `viagens.desbloqueio` não importa nada de `pagamentos` (ADR-004).
 - **RM4** - Só `frota.telemetria` e `camara.relatorios_municipais` importam `viagens.percursos` (ADR-007).
 - **RM5** - Só `lisboa_pedala.Main` importa todos os componentes. Nenhum componente importa `Main`.
-- **RM6** - Nada em `lisboa_pedala` importa `simuladores` (ADR-009).
 
-A RM3 e a RM4 já estão contidas na RM1, mas têm um teste próprio para que a falha diga logo que ADR foi violado. Todas são verificadas com **ArchUnit** em `src/test/java/lisboa_pedala/arquitetura/` e correm com o `mvn test`. 
+A RM3 e a RM4 já estão contidas na RM1, mas têm um teste próprio para que a falha diga logo que ADR foi violado.
 
 ___
 
-# 3) Vista de componentes e conectores
+# 3) Vista de componentes e conectores (IA)
 
 Fluxo desbloquear, devolver e cobrar (US1). O diagrama também está em [cc-desbloquear-devolver-cobrar.md](cc-desbloquear-devolver-cobrar.md).
 
@@ -112,16 +110,16 @@ Notas:
 
 ### Conectores
 
-| **Conector**                 | **Onde**                                  | **Tipo**                      | **Porquê**                                                                        |
-| ---------------------------- | ----------------------------------------- | ----------------------------- | --------------------------------------------------------------------------------- |
-| Pedido REST                  | Doca e app > Desbloqueio, Doca > Receção  | Síncrono, pela rede móvel     | Dispositivos externos. Sem confirmação, a doca volta a enviar (ADR-005).          |
-| Chamada de método            | Entre componentes, pela interface pública | Síncrono                      | Todos os componentes correm na mesma JVM (ADR-009).                               |
-| Pedido de cobrança pendente  | Registo de Viagens > Cobrança             | Assíncrono (fica na BD)       | O fecho da viagem não espera pelo fornecedor de pagamentos (ADR-004).             |
-| Adaptador externo            | Cobrança > Pagamentos, Faturação > AT     | Síncrono, com nova tentativa  | Uma falha externa não desfaz a viagem. O pedido fica pendente e repete-se depois. |
+| **Conector**                | **Onde**                                  | **Tipo**                     | **Porquê**                                                                        |
+| --------------------------- | ----------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------- |
+| Pedido REST                 | Doca e app > Desbloqueio, Doca > Receção  | Síncrono, pela rede móvel    | Dispositivos externos. Sem confirmação, a doca volta a enviar.                    |
+| Chamada de método           | Entre componentes, pela interface pública | Síncrono                     | Todos os componentes correm na mesma JVM.                                         |
+| Pedido de cobrança pendente | Registo de Viagens > Cobrança             | Assíncrono (fica na BD)      | O fecho da viagem não espera pelo fornecedor de pagamentos.                       |
+| Adaptador externo           | Cobrança > Pagamentos, Faturação > AT     | Síncrono, com nova tentativa | Uma falha externa não desfaz a viagem. O pedido fica pendente e repete-se depois. |
 
 ___
 
-# 4) Vista de alocação
+# 4) Vista de alocação (IA)
  
 ### Implantação
 
@@ -141,17 +139,16 @@ Cada componente só lê e escreve as suas tabelas. As tabelas de `percursos` só
 
 A atribuição segue o particionamento por domínio. O ficheiro [CODEOWNERS](../CODEOWNERS) aplica esta tabela.
 
-| **Elemento**    | **Domínios**            | **Componentes** | **Porquê**                                                       |
-| --------------- | ----------------------- | --------------- | ---------------------------------------------------------------- |
-| @Joaotuinha08   | viagens                 | 4               | Caminho crítico do contrato (disponibilidade e recuperabilidade) |
-| @TomasECarvalho | pagamentos, clientes    | 5               | Extensibilidade da tarifação e o fim da US1                      |
-| @Joaotuinha08   | estacoes, frota, camara | 6               | Componentes fora da US1 (US2 e US4)                              |
+| **Elemento**    | **Domínios**                  | **Componentes** | **Porquê**                                                                                                      |
+| --------------- | ----------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
+| @Joaotuinha08   | viagens, pagamentos, clientes | 9               | Caminho crítico do contrato (disponibilidade e recuperabilidade)<br>Extensibilidade da tarifação e o fim da US1 |
+| @TomasECarvalho | estacoes, frota, camara       | 6               | Componentes fora da US1 (US2 e US4)                                                                             |
 
 `ARCHITECTURE.md`, `docs/`, `pom.xml`, `Main.java` e os testes de arquitetura pertencem aos dois, porque uma mudança nas regras afeta todos.
 
 ___
 
-# 5) Diagramas C4
+# 5) Diagramas C4 (IA)
 
 Todos usam a mesma notação e legenda, e batem certo com as vistas acima.
 

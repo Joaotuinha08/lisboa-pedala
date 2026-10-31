@@ -1,4 +1,4 @@
-# Dependências entre componentes lógicos
+# Dependências entre componentes lógicos (IA)
 
 Diagrama dos componentes ([02-componentes.md](02-componentes.md), secção 8).
 
