@@ -91,9 +91,10 @@ O diagrama destas dependências está em [dependencias-componentes.md](diagramas
 
 - **RM1** - Um componente só importa os componentes da sua linha na tabela.
 - **RM2** - Não há ciclos entre componentes.
-- **RM3** - `viagens.desbloqueio` não importa nada de `pagamentos` (ADR-004).
-- **RM4** - Só `frota.telemetria` e `camara.relatorios_municipais` importam `viagens.percursos` (ADR-007).
+- **RM3** - `viagens.desbloqueio` não importa nada de `pagamentos`.
+- **RM4** - Só `frota.telemetria` e `camara.relatorios_municipais` importam `viagens.percursos` .
 - **RM5** - Só `lisboa_pedala.Main` importa todos os componentes. Nenhum componente importa `Main`.
+- **RM6** - Nada em `lisboa_pedala` importa `simuladores`.
 
 A RM3 e a RM4 já estão contidas na RM1, mas têm um teste próprio para que a falha diga logo que ADR foi violado.
 
@@ -110,12 +111,12 @@ Notas:
 
 ### Conectores
 
-| **Conector**                | **Onde**                                  | **Tipo**                     | **Porquê**                                                                        |
-| --------------------------- | ----------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------- |
-| Pedido REST                 | Doca e app > Desbloqueio, Doca > Receção  | Síncrono, pela rede móvel    | Dispositivos externos. Sem confirmação, a doca volta a enviar.                    |
-| Chamada de método           | Entre componentes, pela interface pública | Síncrono                     | Todos os componentes correm na mesma JVM.                                         |
-| Pedido de cobrança pendente | Registo de Viagens > Cobrança             | Assíncrono (fica na BD)      | O fecho da viagem não espera pelo fornecedor de pagamentos.                       |
-| Adaptador externo           | Cobrança > Pagamentos, Faturação > AT     | Síncrono, com nova tentativa | Uma falha externa não desfaz a viagem. O pedido fica pendente e repete-se depois. |
+| **Conector**                 | **Onde**                                  | **Tipo**                      | **Porquê**                                                                        |
+| ---------------------------- | ----------------------------------------- | ----------------------------- | --------------------------------------------------------------------------------- |
+| Pedido REST                  | Doca e app > Desbloqueio, Doca > Receção  | Síncrono, pela rede móvel     | Dispositivos externos. Sem confirmação, a doca volta a enviar (ADR-005).          |
+| Chamada de método            | Entre componentes, pela interface pública | Síncrono                      | Todos os componentes correm na mesma JVM (ADR-009).                               |
+| Pedido de cobrança pendente  | Registo de Viagens > Cobrança             | Assíncrono (fica na BD)       | O fecho da viagem não espera pelo fornecedor de pagamentos (ADR-004).             |
+| Adaptador externo            | Cobrança > Pagamentos, Faturação > AT     | Síncrono, com nova tentativa  | Uma falha externa não desfaz a viagem. O pedido fica pendente e repete-se depois. |
 
 ___
 

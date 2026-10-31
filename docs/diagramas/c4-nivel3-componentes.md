@@ -1,4 +1,4 @@
-# C4 nível 3 - Componentes
+# C4 nível 3 - Componentes (IA)
 
 Componentes dentro do Servidor Lisboa Pedala, agrupados por domínio ([ADR-008](../adr/ADR-008.md)). As setas internas são exatamente as regras allowed-to-use da vista de módulos ([03-particionamento-e-vistas.md](../03-particionamento-e-vistas.md), secção 2).
 
