@@ -37,9 +37,3 @@ Todos os casos abaixo passaram nas fitness functions. Foram detetados numa revis
 
 - **Apanham:** imports entre componentes (RM1 a RM6), ciclos, mais de uma classe pública por componente e tabelas sem o prefixo do componente.
 - **Deixam passar:** tudo o que não é um import. Nenhum dos cinco erros acima é visível para o ArchUnit: um pacote novo autorizado na própria regra, uma rota a mais, um valor inventado, um tipo duplicado ou uma responsabilidade no sítio errado. A verificação das tabelas procura nomes depois de `FROM`, `INTO`, `UPDATE` e `JOIN` com uma expressão regular, por isso SQL com palavras-chave em minúsculas ou com o nome da tabela montado por concatenação escapa.
-
-## Riscos para o teste de regeneração
-
-- **Tarifação.** Os testes da US-1 esperam exatamente 100 e 200 cêntimos, mas os preços só estão no código. Uma regeneração a partir do ARCHITECTURE.md escolheria outros valores e os testes falhariam. Os preços têm de passar para o ARCHITECTURE.md ou para o ADR-006.
-- **Cobrança e Receção de Eventos.** Sem contratos, a IA pode gerar operações e estados com outros nomes. Uma secção curta de contratos por componente reduz a variação entre regenerações.
-- **Pacote `partilhado`.** Como não está na especificação, a IA só descobre que tem de usar a `BaseDados` e o `Rest` se ler o resto do código. Uma regeneração pode criar versões próprias dessas classes dentro do componente.
