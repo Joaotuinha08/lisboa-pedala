@@ -120,9 +120,9 @@ Notas:
 
 ___
 
-# 4) Vista de alocação (IA)
+# 4) Vista de alocação
  
-### Implantação
+### Implantação (IA)
 
 O sistema corre numa só aplicação Java com uma base de dados SQLite. A decisão está no [ADR-009.md](ADR-009.md) e corresponde ao [C4 nível 2](c4-nivel2-contentores.md).
 
@@ -138,14 +138,14 @@ Cada componente só lê e escreve as suas tabelas. As tabelas de `percursos` só
 
 ### Atribuição de trabalho
 
-A atribuição segue o particionamento por domínio. O ficheiro [CODEOWNERS](../CODEOWNERS) aplica esta tabela.
+A atribuição separa a documentação do código. O ficheiro [CODEOWNERS](../CODEOWNERS) aplica esta tabela.
 
-| **Elemento**    | **Domínios**                  | **Componentes** | **Porquê**                                                                                                      |
-| --------------- | ----------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------- |
-| @Joaotuinha08   | viagens, pagamentos, clientes | 9               | Caminho crítico do contrato (disponibilidade e recuperabilidade)<br>Extensibilidade da tarifação e o fim da US1 |
-| @TomasECarvalho | estacoes, frota, camara       | 6               | Componentes fora da US1 (US2 e US4)                                                                             |
+| **Elemento**    | **Responsável por**                                                            |
+| --------------- | ------------------------------------------------------------------------------ |
+| @Joaotuinha08   | `docs/`: características, componentes, vistas, ADRs e diagramas                |
+| @TomasECarvalho | Os 15 componentes, `Main`, `partilhado`, `pom.xml`, testes e fitness functions |
 
-`ARCHITECTURE.md`, `docs/`, `pom.xml`, `Main.java` e os testes de arquitetura pertencem aos dois, porque uma mudança nas regras afeta todos.
+`ARCHITECTURE.md` e os simuladores pertencem aos dois, porque uma mudança nas regras afeta todos.
 
 ___
 

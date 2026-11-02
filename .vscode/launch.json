@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Plataforma",
+      "request": "launch",
+      "mainClass": "lisboa_pedala.Main"
+    },
+    {
+      "type": "java",
+      "name": "CLI demo",
+      "request": "launch",
+      "mainClass": "simuladores.CliApp",
+      "args": ["demo"]
+    },
+    {
+      "type": "java",
+      "name": "CLI historico",
+      "request": "launch",
+      "mainClass": "simuladores.CliApp",
+      "args": ["historico", "u-assinante-1"]
+    }
+  ]
+}

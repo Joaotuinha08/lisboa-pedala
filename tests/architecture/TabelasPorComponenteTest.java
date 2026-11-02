@@ -1,6 +1,6 @@
-package lisboa_pedala.arquitetura;
+package architecture;
 
-import static lisboa_pedala.arquitetura.Componentes.PODE_USAR;
+import static architecture.Componentes.PODE_USAR;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;

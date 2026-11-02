@@ -1,1 +1,17 @@
-# preencher depois de definir os componentes (docs/02-componentes.md)
+# Vista de atribuição de trabalho (docs/03-particionamento-e-vistas.md, secção 4)
+# Num CODEOWNERS a última regra que corresponde a um ficheiro é a que conta.
+
+# Por omissão (prompts, configuração): os dois
+                                @Joaotuinha08 @TomasECarvalho
+
+# Documentação
+/docs/                          @Joaotuinha08
+
+# Código, testes e fitness functions
+/src/                           @TomasECarvalho
+/tests/                         @TomasECarvalho
+/pom.xml                        @TomasECarvalho
+
+# Partilhado pelos dois
+/src/main/java/simuladores/     @Joaotuinha08 @TomasECarvalho
+/ARCHITECTURE.md                @Joaotuinha08 @TomasECarvalho

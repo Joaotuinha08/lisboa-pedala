@@ -1,13 +1,13 @@
-package lisboa_pedala.arquitetura;
+package architecture;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices;
-import static lisboa_pedala.arquitetura.Componentes.PARTILHADO;
-import static lisboa_pedala.arquitetura.Componentes.PODE_USAR;
-import static lisboa_pedala.arquitetura.Componentes.RAIZ;
-import static lisboa_pedala.arquitetura.Componentes.padrao;
-import static lisboa_pedala.arquitetura.Componentes.pacote;
+import static architecture.Componentes.PARTILHADO;
+import static architecture.Componentes.PODE_USAR;
+import static architecture.Componentes.RAIZ;
+import static architecture.Componentes.padrao;
+import static architecture.Componentes.pacote;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

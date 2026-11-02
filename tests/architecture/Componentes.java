@@ -1,4 +1,4 @@
-package lisboa_pedala.arquitetura;
+package architecture;
 
 import java.util.LinkedHashMap;
 import java.util.List;
