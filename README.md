@@ -8,7 +8,7 @@ Trabalho Prático 1 de Design de Software (FCUL, 2026/27): especificação de ar
 | --------------- |
 | @Joaotuinha08   |
 | @TomasECarvalho |
-A atribuição completa está em `CODEOWNERS` e na secção 4 de `docs/03-particionamento-e-vistas.md`.
+A atribuição completa está no `CODEOWNERS` e na secção 4 de `docs/03-particionamento-e-vistas.md`.
 
 ## Uso de IA
 
